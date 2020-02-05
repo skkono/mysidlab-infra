@@ -1,0 +1,20 @@
+---
+
+- name: Configure instance
+  hosts: all
+  gather_facts: false
+  become: true
+  vars:
+    hostname: Sheldon-cateyes
+    tz: Pacific/Honolulu
+    
+  tasks:
+    - name: Set timezone to "{{ tz }}"
+      timezone:
+        name: "{{ tz }}"
+    - name: Display new timezone
+      shell: date +%Z
+      
+    - name: Set hostname
+      hostname:
+        name: "{{ hostname }}"
